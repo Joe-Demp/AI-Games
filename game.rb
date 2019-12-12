@@ -7,7 +7,6 @@ class Game
     @p1 = player_1
     @p2 = player_2
     @p1s_turn = true
-    @state = GameState.new
   end
 
   def play_next_move

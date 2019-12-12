@@ -1,4 +1,6 @@
 class Move
+  attr_reader :row, :col
+
   def initialize(row, column)
     @row = row >= 0 ? row : nil
     @col = column >= 0 ? column : nil
