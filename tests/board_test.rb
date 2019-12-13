@@ -7,10 +7,10 @@ require_relative '../move.rb'
 # Some Documentation about BoardTest
 class BoardTest < Test::Unit::TestCase
   def setup
-    @empty_board = Board.new
-    @board_a = Board.new
-    @board_f = Board.new
-    @board_p = Board.new
+    @empty_board = Board.new(3)
+    @board_a = Board.new(3)
+    @board_f = Board.new(3)
+    @board_p = Board.new(3)
 
     Board.send(:attr_accessor, :state)
 
@@ -42,20 +42,8 @@ class BoardTest < Test::Unit::TestCase
   end
 
   def test_equality
-    empty_b = Board.new
+    empty_b = Board.new(3)
     assert_equal(empty_b, @empty_board)
     assert(@board_a == @board_p)
-  end
-
-  def test_to_s
-    empty_board_string = " _|_ _|_ \n" \
-     " _|_ _|_ \n" \
-     "  |   |  "
-    assert_equal(empty_board_string, @empty_board.to_s)
-
-    full_board_string = "x_|_x_|_x\n" \
-     "x_|_x_|_x\n" \
-     "x | x | x"
-    assert_equal(full_board_string, @board_f.to_s)
   end
 end

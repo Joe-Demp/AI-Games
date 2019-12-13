@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Some Documentation about Move
 class Move
   attr_reader :row, :col
 
@@ -7,6 +10,6 @@ class Move
   end
 
   def valid?
-    true unless @row.nil? || @col.nil?
+    !(@row.nil? || @col.nil?)
   end
 end
