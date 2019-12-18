@@ -19,8 +19,6 @@ class BoardGame
 
   # @todo The player will see prospective boards, do they need to play using moves?
   def place(symbol, move)
-    return unless move_in_bounds?(move)
-
     index = (move.row * @side) + (move.col % @side)
     @state[index] = symbol
   end
@@ -48,7 +46,7 @@ class BoardGame
   private
 
   def move_in_bounds?(move)
-    space_unoccupied = symbol_at(move) != SPACE
+    space_unoccupied = symbol_at(move) == SPACE
     space_unoccupied && move.valid? && move.row < @side && move.col < @side
   end
 

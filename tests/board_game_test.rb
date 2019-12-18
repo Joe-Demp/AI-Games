@@ -60,6 +60,21 @@ class BoardGameTest < Test::Unit::TestCase
   end
 
   def test_move_in_bounds?
-    pend 'Not implemented'
+    # empty square
+    assert(@empty_board.send(:move_in_bounds?, Move.new(0, 0)))
+    assert(@empty_board.send(:move_in_bounds?, Move.new(2, 2)))
+
+    # full square
+    assert_false(@board_a.send(:move_in_bounds?, Move.new(0, 0)))
+
+    # square out of bounds
+    assert_false(@board_a.send(:move_in_bounds?, Move.new(3, 3)))
+  end
+
+  def test_symbol_at
+    assert_equal(:x, @board_a.send(:symbol_at, Move.new(0, 0)))
+    assert_equal(' '.to_sym, @board_a.send(:symbol_at, Move.new(0, 1)))
+    assert_equal(:o, @board_a.send(:symbol_at, Move.new(1, 1)))
+    assert_equal(:o, @board_a.send(:symbol_at, Move.new(2, 1)))
   end
 end
