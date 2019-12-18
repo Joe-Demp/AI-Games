@@ -9,9 +9,7 @@ class Game
     @p1s_turn = true
   end
 
-  def play_next_move
-
-  end
+  def play_next_move; end
 
   def finished?
     @state.finished?

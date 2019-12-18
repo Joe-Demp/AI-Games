@@ -17,12 +17,12 @@ class BoardGame
     # yield each next_state
   end
 
-  # @todo think about this method. If the player is going to see prospective boards, do they need to play using 'moves'?
+  # @todo The player will see prospective boards, do they need to play using moves?
   def place(symbol, move)
-    if move_in_bounds?(move)
-      index = (move.row * @side) + (move.col % @side)
-      @state[index] = symbol
-    end
+    return unless move_in_bounds?(move)
+
+    index = (move.row * @side) + (move.col % @side)
+    @state[index] = symbol
   end
 
   def finished?
@@ -30,14 +30,19 @@ class BoardGame
   end
 
   def ==(other)
-    return @state == other.state if other.is_a?(BoardGame)
+    return @state == other.state if other.is_a? BoardGame
 
     false
   end
 
   def to_s
-    # @todo implement this to take burden off subclasses
-    ''
+    board = ''
+    0.upto(@side - 2) do |i|
+      first_index = i * @side
+      board += row_to_s(first_index)
+    end
+    first_index = (@side - 1) * @side
+    board + row_to_s(first_index, true)
   end
 
   private
@@ -50,5 +55,29 @@ class BoardGame
   def symbol_at(move)
     index = (move.row * @side) + (move.col % @side)
     @state[index]
+  end
+
+  def row_to_s(first_number, last_row = false)
+    return last_row_to_s(first_number) if last_row
+
+    row = ''
+    # add all but one symbol to string in format 1_|_2_|_3...
+    0.upto(@side - 2) do |i|
+      row += "#{@state[first_number + i]}_|_"
+    end
+
+    # once more with #{@state[first_number + @side - 1]}
+    row + "#{@state[first_number + @side - 1]}\n"
+  end
+
+  def last_row_to_s(first_number)
+    row = ''
+    # add all but one symbol to string in format 1 | 2 | 3...
+    0.upto(@side - 2) do |i|
+      row += "#{@state[first_number + i]} | "
+    end
+
+    # once more with #{@state[first_number + @side - 1]}
+    row + "#{@state[first_number + @side - 1]}\n"
   end
 end

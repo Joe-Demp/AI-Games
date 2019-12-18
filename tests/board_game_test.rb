@@ -46,4 +46,20 @@ class BoardGameTest < Test::Unit::TestCase
     assert_equal(empty_b, @empty_board)
     assert(@board_a == @board_p)
   end
+
+  def test_to_s
+    empty_board_string = " _|_ _|_ \n" \
+     " _|_ _|_ \n" \
+     "  |   |  \n"
+    assert_equal(empty_board_string, @empty_board.to_s)
+
+    full_board_string = "x_|_x_|_x\n" \
+     "x_|_x_|_x\n" \
+     "x | x | x\n"
+    assert_equal(full_board_string, @board_f.to_s)
+  end
+
+  def test_move_in_bounds?
+    pend 'Not implemented'
+  end
 end

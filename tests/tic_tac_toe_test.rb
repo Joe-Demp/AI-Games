@@ -44,18 +44,6 @@ class TicTacToeTest < Test::Unit::TestCase
     pend 'Need to test more winning cases'
   end
 
-  def test_to_s
-    empty_board_string = " _|_ _|_ \n" \
-     " _|_ _|_ \n" \
-     '  |   |  '
-    assert_equal(empty_board_string, @empty_board.to_s)
-
-    full_board_string = "x_|_x_|_x\n" \
-     "x_|_x_|_x\n" \
-     'x | x | x'
-    assert_equal(full_board_string, @board_f.to_s)
-  end
-
   def test_winning_row
     pend 'Not implemented'
   end
