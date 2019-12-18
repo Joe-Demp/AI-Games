@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 require 'test/unit'
-require_relative '../board.rb'
+require_relative '../board_game.rb'
 require_relative '../move.rb'
 
 # Some Documentation about BoardTest
-class BoardTest < Test::Unit::TestCase
+class BoardGameTest < Test::Unit::TestCase
   def setup
-    @empty_board = Board.new(3)
-    @board_a = Board.new(3)
-    @board_f = Board.new(3)
-    @board_p = Board.new(3)
+    @empty_board = BoardGame.new(3)
+    @board_a = BoardGame.new(3)
+    @board_f = BoardGame.new(3)
+    @board_p = BoardGame.new(3)
 
-    Board.send(:attr_accessor, :state)
+    BoardGame.send(:attr_accessor, :state)
 
     @board_a.place(:x, Move.new(0, 0))
     @board_a.place(:o, Move.new(1, 1))
@@ -26,7 +26,7 @@ class BoardTest < Test::Unit::TestCase
   end
 
   def teardown
-    Board.send(:undef_method, :state)
+    BoardGame.send(:undef_method, :state)
   end
 
   def test_place
@@ -42,7 +42,7 @@ class BoardTest < Test::Unit::TestCase
   end
 
   def test_equality
-    empty_b = Board.new(3)
+    empty_b = BoardGame.new(3)
     assert_equal(empty_b, @empty_board)
     assert(@board_a == @board_p)
   end

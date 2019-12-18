@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'board.rb'
+require_relative 'board_game.rb'
 require_relative 'move.rb'
 
-# Some Documentation about TicTacToeBoard
-class TicTacToeBoard < Board
+# Some Documentation about TicTacToe
+class TicTacToe < BoardGame
   def initialize
     super(3)
   end

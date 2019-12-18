@@ -1,4 +1,4 @@
-require_relative 'board.rb'
+require_relative 'board_game.rb'
 
 class Game
   attr_reader :p1s_turn

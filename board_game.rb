@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Some Documentation about Board
-class Board
+# Some Documentation about BoardGame
+class BoardGame
   SPACE = ' '.to_sym
   def initialize(side_len)
     @side = side_len
@@ -30,9 +30,14 @@ class Board
   end
 
   def ==(other)
-    return @state == other.state if other.is_a?(Board)
+    return @state == other.state if other.is_a?(BoardGame)
 
     false
+  end
+
+  def to_s
+    # @todo implement this to take burden off subclasses
+    ''
   end
 
   private

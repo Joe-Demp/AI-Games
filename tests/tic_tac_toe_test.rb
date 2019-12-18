@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 require 'test/unit'
-require_relative '../tic_tac_toe_board.rb'
+require_relative '../tic_tac_toe.rb'
 
-# Documentation for TicTacToeBoardTest
-class TicTacToeBoardTest < Test::Unit::TestCase
+# Documentation for TicTacToeTest
+class TicTacToeTest < Test::Unit::TestCase
   def setup
-    @empty_board = TicTacToeBoard.new
-    @board_f = TicTacToeBoard.new
-    @board_w = TicTacToeBoard.new
+    @empty_board = TicTacToe.new
+    @board_f = TicTacToe.new
+    @board_w = TicTacToe.new
 
-    Board.send(:attr_accessor, :state, :side)
+    BoardGame.send(:attr_accessor, :state, :side)
 
     @board_f.state.fill(:x, 0..8)
 
@@ -20,7 +20,7 @@ class TicTacToeBoardTest < Test::Unit::TestCase
   end
 
   def teardown
-    Board.send(:undef_method, :state, :side)
+    BoardGame.send(:undef_method, :state, :side)
   end
 
   def test_initialize
