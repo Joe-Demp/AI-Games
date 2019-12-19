@@ -9,17 +9,24 @@ class BoardGame
     @state.fill(' '.to_sym, 0...(@side**2))
   end
 
+  def each_next_move
+    @state.each_index do |index|
+      move = Move.to_move(index, @side)
+      yield move if move_in_bounds?(move)
+    end
+  end
+
   def each_next_board(symbol)
-    # @todo implement tomorrow
-    # take a clone of the current board
-    # replace its state with a clone of the current state
-    #   and a symbol in each empty space
-    # yield each next_state
+    each_next_move do |move|
+      next_board = clone
+      next_board.place(symbol, move)
+      yield next_board
+    end
   end
 
   # @todo The player will see prospective boards, do they need to play using moves?
   def place(symbol, move)
-    index = (move.row * @side) + (move.col % @side)
+    index = (move.row * @side) + move.col
     @state[index] = symbol
   end
 
@@ -33,6 +40,12 @@ class BoardGame
     false
   end
 
+  def clone
+    other = BoardGame.new(@side)
+    other.state = @state.clone
+    other
+  end
+
   def to_s
     board = ''
     0.upto(@side - 2) do |i|
@@ -42,6 +55,10 @@ class BoardGame
     first_index = (@side - 1) * @side
     board + row_to_s(first_index, true)
   end
+
+  protected
+
+  attr_writer :state # to allow for cloning
 
   private
 

@@ -12,4 +12,12 @@ class Move
   def valid?
     !(@row.nil? || @col.nil?)
   end
+
+  def to_index(side)
+    (@row * side) + @column
+  end
+
+  def self.to_move(index, side_length)
+    Move.new(index / side_length, index % side_length)
+  end
 end

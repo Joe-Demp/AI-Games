@@ -29,4 +29,12 @@ class MoveTest < Test::Unit::TestCase
     assert_false(@bad_move_2.valid?)
     assert_false(@bad_move_3.valid?)
   end
+
+  def test_to_index
+    pend 'Not implemented'
+  end
+
+  def test_to_move
+    pend 'Not implemented'
+  end
 end

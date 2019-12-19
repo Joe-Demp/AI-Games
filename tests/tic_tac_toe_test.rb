@@ -32,7 +32,7 @@ class TicTacToeTest < Test::Unit::TestCase
     assert(@board_f.finished?)
     assert(@board_w.finished?)
 
-    pend 'Needs more assertions'
+    assert_false(@empty_board.finished?)
   end
 
   def test_winning_symbol

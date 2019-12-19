@@ -29,6 +29,14 @@ class BoardGameTest < Test::Unit::TestCase
     BoardGame.send(:undef_method, :state)
   end
 
+  def test_each_next_move
+    pend 'Not implemented'
+  end
+
+  def test_each_next_board
+    pend 'Not implemented'
+  end
+
   def test_place
     assert_equal(:x, @board_a.state[0])
     assert_equal(:o, @board_a.state[4])
@@ -45,6 +53,10 @@ class BoardGameTest < Test::Unit::TestCase
     empty_b = BoardGame.new(3)
     assert_equal(empty_b, @empty_board)
     assert(@board_a == @board_p)
+  end
+
+  def test_clone
+    pend 'Not implemented'
   end
 
   def test_to_s
