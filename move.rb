@@ -13,8 +13,12 @@ class Move
     !(@row.nil? || @col.nil?)
   end
 
+  def ==(other)
+    @row = other.row && @col == other.col && other.is_a?(Move)
+  end
+
   def to_index(side)
-    (@row * side) + @column
+    (@row * side) + @col
   end
 
   def self.to_move(index, side_length)
