@@ -8,15 +8,14 @@ class TicTacToeTest < Test::Unit::TestCase
   def setup
     @empty_board = TicTacToe.new
     @board_f = TicTacToe.new
-    @board_w = TicTacToe.new
-
     BoardGame.send(:attr_accessor, :state, :side)
 
     @board_f.state.fill(:x, 0..8)
 
-    @board_w.state[0] = :o
-    @board_w.state[4] = :o
-    @board_w.state[8] = :o
+    # setup wins
+    setup_diagonal_wins
+    setup_vertical_wins
+    setup_horizontal_wins
   end
 
   def teardown
@@ -25,34 +24,70 @@ class TicTacToeTest < Test::Unit::TestCase
 
   def test_initialize
     assert_equal(3, @empty_board.side)
-    # @todo check if this is complete
   end
 
   def test_finished?
     assert(@board_f.finished?)
     assert(@board_w.finished?)
+    assert(@board_z.finished?)
+    assert(@board_b.finished?)
 
     assert_false(@empty_board.finished?)
   end
 
   def test_winning_symbol
     assert_equal(:x, @board_f.winning_symbol)
-    assert_equal(:o, @board_w.winning_symbol)
+    assert_equal(:d, @board_w.winning_symbol)
+    assert_equal(:v, @board_z.winning_symbol)
+    assert_equal(:h, @board_b.winning_symbol)
 
     assert_nil(@empty_board.winning_symbol)
-
-    pend 'Need to test more winning cases'
-  end
-
-  def test_winning_row
-    pend 'Not implemented'
-  end
-
-  def test_winning_column
-    pend 'Not implemented'
   end
 
   def test_winning_diagonal
-    assert_equal(:o, @board_w.send(:winning_diagonal))
+    assert_equal(:d, @board_v.send(:winning_diagonal))
+    assert_equal(:d, @board_w.send(:winning_diagonal))
+  end
+
+  def test_winning_column
+    assert_equal(:v, @board_x.send(:winning_column))
+    assert_equal(:v, @board_y.send(:winning_column))
+    assert_equal(:v, @board_z.send(:winning_column))
+  end
+
+  def test_winning_row
+    assert_equal(:h, @board_a.send(:winning_row))
+    assert_equal(:h, @board_b.send(:winning_row))
+    assert_equal(:h, @board_c.send(:winning_row))
+  end
+
+  private
+
+  def setup_diagonal_wins
+    @board_v = TicTacToe.new
+    @board_w = TicTacToe.new
+
+    @board_v.state = [nil, nil, :d, nil, :d, nil, :d, nil, nil]
+    @board_w.state = [:d, nil, nil, nil, :d, nil, nil, nil, :d]
+  end
+
+  def setup_vertical_wins
+    @board_x = TicTacToe.new
+    @board_y = TicTacToe.new
+    @board_z = TicTacToe.new
+
+    @board_x.state = [:v, nil, nil, :v, nil, nil, :v, nil, nil]
+    @board_y.state = [nil, :v, nil, nil, :v, nil, nil, :v, nil]
+    @board_z.state = [nil, nil, :v, nil, nil, :v, nil, nil, :v]
+  end
+
+  def setup_horizontal_wins
+    @board_a = TicTacToe.new
+    @board_b = TicTacToe.new
+    @board_c = TicTacToe.new
+
+    @board_a.state = [:h, :h, :h, nil, nil, nil, nil, nil, nil]
+    @board_b.state = [nil, nil, nil, :h, :h, :h, nil, nil, nil]
+    @board_c.state = [nil, nil, nil, nil, nil, nil, :h, :h, :h]
   end
 end

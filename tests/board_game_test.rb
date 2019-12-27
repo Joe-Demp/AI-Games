@@ -30,7 +30,16 @@ class BoardGameTest < Test::Unit::TestCase
   end
 
   def test_each_next_move
-    pend 'Not implemented'
+    next_moves = []
+    @empty_board.each_next_move { |move| next_moves << move }
+    correct_moves0 = [
+      Move.new(0, 0), Move.new(0, 1), Move.new(0, 2),
+      Move.new(1, 0), Move.new(1, 1), Move.new(1, 2),
+      Move.new(2, 0), Move.new(2, 1), Move.new(2, 2)
+    ]
+    assert_equal(correct_moves0, next_moves)
+
+    pend 'Not finished. Needs a test of a full and a half empty board'
   end
 
   def test_each_next_board

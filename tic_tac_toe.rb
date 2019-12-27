@@ -17,54 +17,38 @@ class TicTacToe < BoardGame
     winning_row || winning_column || winning_diagonal
   end
 
-  def to_s
-    "#{@state[0]}_|_#{@state[1]}_|_#{@state[2]}\n" \
-    "#{@state[3]}_|_#{@state[4]}_|_#{@state[5]}\n" \
-    "#{@state[6]} | #{@state[7]} | #{@state[8]}"
-  end
+  # def to_s
+  #   "#{@state[0]}_|_#{@state[1]}_|_#{@state[2]}\n" \
+  #   "#{@state[3]}_|_#{@state[4]}_|_#{@state[5]}\n" \
+  #   "#{@state[6]} | #{@state[7]} | #{@state[8]}"
+  # end
 
   private
 
   def winning_row
-    (0...3).each do |row|
-      sym = @state[row * 3]
-      won = true
-      (1...3).each do |col|
-        won &&= (sym == symbol_at(Move.new(row, col)))
-      end
-      if won
-        return sym unless sym == SPACE
-      end
-    end
-    nil
+    sym = winning_positions([0, 1, 2])
+    sym ||= winning_positions([3, 4, 5])
+    sym ||= winning_positions([6, 7, 8])
+    sym unless sym == SPACE
   end
 
   def winning_column
-    (0...3).each do |col|
-      sym = @state[col]
-      won = true
-      (1...3).each do |row|
-        won &&= (sym == symbol_at(Move.new(row, col)))
-      end
-      if won
-        return sym unless sym == SPACE
-      end
-    end
-    nil
+    sym = winning_positions([0, 3, 6])
+    sym ||= winning_positions([1, 4, 7])
+    sym ||= winning_positions([2, 5, 8])
+    sym unless sym == SPACE
   end
 
   def winning_diagonal
-    sym = @state[4]
-    diagonal = lambda do |arr|
-      won = true
-      arr.each do |index|
-        won &&= (sym == @state[index])
-      end
-      if won
-        return sym unless sym == SPACE
-      end
-    end
+    sym = winning_positions([0, 4, 8])
+    sym ||= winning_positions([2, 4, 6])
+    sym unless sym == SPACE
+  end
 
-    diagonal.call([0, 4, 8]) || diagonal.call([2, 4, 6])
+  def winning_positions(positions)
+    won = true
+    sym = @state[positions[0]]
+    positions.each { |pos| won &&= sym == @state[pos] }
+    sym if won
   end
 end
