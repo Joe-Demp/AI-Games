@@ -16,15 +16,7 @@ class BoardGame
     end
   end
 
-  def each_next_board(symbol)
-    each_next_move do |move|
-      next_board = clone
-      next_board.place(symbol, move)
-      yield next_board
-    end
-  end
-
-  def each_next_board_and_move
+  def each_next_board_and_move(symbol)
     each_next_move do |move|
       next_board = clone
       next_board.place(symbol, move)
@@ -32,7 +24,6 @@ class BoardGame
     end
   end
 
-  # @todo The player will see prospective boards, do they need to play using moves?
   def place(symbol, move)
     index = (move.row * @side) + move.col
     @state[index] = symbol

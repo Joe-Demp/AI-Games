@@ -49,16 +49,13 @@ class BoardGameTest < Test::Unit::TestCase
     assert_equal([], next_moves_full)
   end
 
-  def test_each_next_board
-    omit 'Method changed to each_next_board_and_move. Must refactor.'
-    next_boards = []
-    @board_b.each_next_board(:o) { |board| next_boards << board }
-
-    assert_equal(actual_next_boards, next_boards)
-  end
-
   def test_each_next_board_and_move
-    pend 'Not Implemented.'
+    next_boards_and_moves = []
+    @board_b.each_next_board_and_move(:o) do |board, move|
+      next_boards_and_moves << [board, move]
+    end
+
+    assert_equal(actual_next_boards_and_moves, next_boards_and_moves)
   end
 
   def test_place
@@ -154,6 +151,23 @@ class BoardGameTest < Test::Unit::TestCase
     3.times do |time|
       boards << BoardGame.new(3)
       boards.last.state = states[time]
+    end
+
+    boards
+  end
+
+  def actual_next_boards_and_moves
+    space = BoardGame::SPACE
+    states = [
+      [:o, space, space, :x, :x, :x, :x, :x, :x],
+      [space, :o, space, :x, :x, :x, :x, :x, :x],
+      [space, space, :o, :x, :x, :x, :x, :x, :x]
+    ]
+
+    boards = []
+    3.times do |time|
+      boards << [BoardGame.new(3), Move.new(0, time)]
+      boards.last[0].state = states[time]
     end
 
     boards
