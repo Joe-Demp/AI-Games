@@ -9,6 +9,7 @@ class BoardGameTest < Test::Unit::TestCase
   def setup
     @empty_board = BoardGame.new(3)
     @board_a = BoardGame.new(3)
+    @board_b = BoardGame.new(3)
     @board_f = BoardGame.new(3)
     @board_p = BoardGame.new(3)
 
@@ -23,6 +24,11 @@ class BoardGameTest < Test::Unit::TestCase
     @board_p.state[7] = :o
 
     @board_f.state.fill(:x, 0..8)
+
+    @board_b = @board_f.clone
+    @board_b.state[0] = BoardGame::SPACE
+    @board_b.state[1] = BoardGame::SPACE
+    @board_b.state[2] = BoardGame::SPACE
   end
 
   def teardown
@@ -30,20 +36,24 @@ class BoardGameTest < Test::Unit::TestCase
   end
 
   def test_each_next_move
-    next_moves = []
-    @empty_board.each_next_move { |move| next_moves << move }
-    correct_moves0 = [
-      Move.new(0, 0), Move.new(0, 1), Move.new(0, 2),
-      Move.new(1, 0), Move.new(1, 1), Move.new(1, 2),
-      Move.new(2, 0), Move.new(2, 1), Move.new(2, 2)
-    ]
-    assert_equal(correct_moves0, next_moves)
+    arrays = next_moves_empty_arrays
+    next_moves_empty, correct_moves0 = arrays[0], arrays[1]
+    assert_equal(correct_moves0, next_moves_empty)
 
-    pend 'Not finished. Needs a test of a full and a half empty board'
+    arrays = next_moves_half_empty_arrays
+    next_moves_half_empty, correct_moves1 = arrays[0], arrays[1]
+    assert_equal(correct_moves1, next_moves_half_empty)
+
+    next_moves_full = []
+    @board_f.each_next_move { |move| next_moves_full << move }
+    assert_equal([], next_moves_full)
   end
 
   def test_each_next_board
-    pend 'Not implemented'
+    next_boards = []
+    @board_b.each_next_board(:o) { |board| next_boards << board }
+
+    assert_equal(actual_next_boards, next_boards)
   end
 
   def test_place
@@ -65,7 +75,11 @@ class BoardGameTest < Test::Unit::TestCase
   end
 
   def test_clone
-    pend 'Not implemented'
+    board_a_clone = @board_a.clone
+    assert_equal(@board_a, board_a_clone)
+
+    board_a_clone.place(:k, Move.new(0, 1))
+    assert_not_equal(@board_a, board_a_clone)
   end
 
   def test_to_s
@@ -97,5 +111,46 @@ class BoardGameTest < Test::Unit::TestCase
     assert_equal(' '.to_sym, @board_a.send(:symbol_at, Move.new(0, 1)))
     assert_equal(:o, @board_a.send(:symbol_at, Move.new(1, 1)))
     assert_equal(:o, @board_a.send(:symbol_at, Move.new(2, 1)))
+  end
+
+  private
+
+  def next_moves_empty_arrays
+    next_moves_empty = []
+    @empty_board.each_next_move { |move| next_moves_empty << move }
+    correct_moves0 = [
+      Move.new(0, 0), Move.new(0, 1), Move.new(0, 2),
+      Move.new(1, 0), Move.new(1, 1), Move.new(1, 2),
+      Move.new(2, 0), Move.new(2, 1), Move.new(2, 2)
+    ]
+    [next_moves_empty, correct_moves0]
+  end
+
+  def next_moves_half_empty_arrays
+    next_moves_half_empty = []
+    @board_a.each_next_move { |move| next_moves_half_empty << move }
+    correct_moves1 = [
+      Move.new(0, 1), Move.new(0, 2),
+      Move.new(1, 0), Move.new(1, 2),
+      Move.new(2, 0), Move.new(2, 2)
+    ]
+    [next_moves_half_empty, correct_moves1]
+  end
+
+  def actual_next_boards
+    space = BoardGame::SPACE
+    states = [
+      [:o, space, space, :x, :x, :x, :x, :x, :x],
+      [space, :o, space, :x, :x, :x, :x, :x, :x],
+      [space, space, :o, :x, :x, :x, :x, :x, :x]
+    ]
+
+    boards = []
+    3.times do |time|
+      boards << BoardGame.new(3)
+      boards.last.state = states[time]
+    end
+
+    boards
   end
 end
