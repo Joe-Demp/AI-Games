@@ -6,8 +6,8 @@ require_relative '../tic_tac_toe.rb'
 # Documentation for TicTacToeTest
 class TicTacToeTest < Test::Unit::TestCase
   def setup
-    @empty_board = TicTacToe.new
-    @board_f = TicTacToe.new
+    @empty_board = TicTacToe.new(nil, nil)
+    @board_f = TicTacToe.new(nil, nil)
     BoardGame.send(:attr_accessor, :state, :side)
 
     @board_f.state.fill(:x, 0..8)
@@ -64,17 +64,17 @@ class TicTacToeTest < Test::Unit::TestCase
   private
 
   def setup_diagonal_wins
-    @board_v = TicTacToe.new
-    @board_w = TicTacToe.new
+    @board_v = TicTacToe.new(nil, nil)
+    @board_w = TicTacToe.new(nil, nil)
 
     @board_v.state = [nil, nil, :d, nil, :d, nil, :d, nil, nil]
     @board_w.state = [:d, nil, nil, nil, :d, nil, nil, nil, :d]
   end
 
   def setup_vertical_wins
-    @board_x = TicTacToe.new
-    @board_y = TicTacToe.new
-    @board_z = TicTacToe.new
+    @board_x = TicTacToe.new(nil, nil)
+    @board_y = TicTacToe.new(nil, nil)
+    @board_z = TicTacToe.new(nil, nil)
 
     @board_x.state = [:v, nil, nil, :v, nil, nil, :v, nil, nil]
     @board_y.state = [nil, :v, nil, nil, :v, nil, nil, :v, nil]
@@ -82,9 +82,9 @@ class TicTacToeTest < Test::Unit::TestCase
   end
 
   def setup_horizontal_wins
-    @board_a = TicTacToe.new
-    @board_b = TicTacToe.new
-    @board_c = TicTacToe.new
+    @board_a = TicTacToe.new(nil, nil)
+    @board_b = TicTacToe.new(nil, nil)
+    @board_c = TicTacToe.new(nil, nil)
 
     @board_a.state = [:h, :h, :h, nil, nil, nil, nil, nil, nil]
     @board_b.state = [nil, nil, nil, :h, :h, :h, nil, nil, nil]

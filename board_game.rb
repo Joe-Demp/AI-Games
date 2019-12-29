@@ -1,9 +1,11 @@
 # frozen_string_literal: true
+require_relative 'game.rb'
 
 # Some Documentation about BoardGame
-class BoardGame
+class BoardGame < Game
   SPACE = ' '.to_sym
-  def initialize(side_len)
+  def initialize(player1, player2, side_len)
+    super(player1, player2)
     @side = side_len
     @state = []
     @state.fill(' '.to_sym, 0...(@side**2))
@@ -40,7 +42,7 @@ class BoardGame
   end
 
   def clone
-    other = BoardGame.new(@side)
+    other = BoardGame.new(@p1, @p2, @side)
     other.state = @state.clone
     other
   end

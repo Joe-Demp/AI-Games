@@ -7,11 +7,11 @@ require_relative '../move.rb'
 # Some Documentation about BoardTest
 class BoardGameTest < Test::Unit::TestCase
   def setup
-    @empty_board = BoardGame.new(3)
-    @board_a = BoardGame.new(3)
-    @board_b = BoardGame.new(3)
-    @board_f = BoardGame.new(3)
-    @board_p = BoardGame.new(3)
+    @empty_board = BoardGame.new(nil, nil, 3)
+    @board_a = BoardGame.new(nil, nil, 3)
+    @board_b = BoardGame.new(nil, nil, 3)
+    @board_f = BoardGame.new(nil, nil, 3)
+    @board_p = BoardGame.new(nil, nil, 3)
 
     BoardGame.send(:attr_accessor, :state)
 
@@ -71,7 +71,7 @@ class BoardGameTest < Test::Unit::TestCase
   end
 
   def test_equality
-    empty_b = BoardGame.new(3)
+    empty_b = BoardGame.new(nil, nil, 3)
     assert_equal(empty_b, @empty_board)
     assert(@board_a == @board_p)
   end
@@ -149,7 +149,7 @@ class BoardGameTest < Test::Unit::TestCase
 
     boards = []
     3.times do |time|
-      boards << BoardGame.new(3)
+      boards << BoardGame.new(nil, nil, 3)
       boards.last.state = states[time]
     end
 
@@ -166,7 +166,7 @@ class BoardGameTest < Test::Unit::TestCase
 
     boards = []
     3.times do |time|
-      boards << [BoardGame.new(3), Move.new(0, time)]
+      boards << [BoardGame.new(nil, nil, 3), Move.new(0, time)]
       boards.last[0].state = states[time]
     end
 

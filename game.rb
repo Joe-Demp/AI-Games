@@ -9,9 +9,10 @@ class Game
   end
 
   def play
-    play_next_move until finished?
-
-    winners_message
+    until finished?
+      play_next_move
+      yield
+    end
   end
 
   def play_next_move
@@ -27,7 +28,7 @@ class Game
   end
 
   def winners_message
-    sym = winning_symbol
+    sym = winning_symbol.nil? ? :nil : winning_symbol
     winner = @p1.symbol == sym ? @p1 : @p2
 
     "(#{sym}) #{winner.name} has won!"

@@ -5,8 +5,8 @@ require_relative 'move.rb'
 
 # Some Documentation about TicTacToe
 class TicTacToe < BoardGame
-  def initialize
-    super(3)
+  def initialize(player1, player2)
+    super(player1, player2,3)
   end
 
   def finished?
