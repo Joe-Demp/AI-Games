@@ -8,7 +8,34 @@ class TTTMiniMaxPlayer < Player
   # takes in the second row of the MiniMax tree
   def get_move(boards_and_moves); end
 
-  def minimax_get_move(boards, maximize=true); end
+  def minimax_get_move(boards, maximize = true)
+    # if maximize, find the max and return it
+    #  the max being:
+    #   the evaluation of the board if board.finished?
+    #   or the minimax of the board's children
+    #
+    # else, find the min => could use a lambda
+    board_comparison = lambda do |board1, board2|
+
+    end
+
+    # @todo tidy this up
+    board_evaluate = lambda do |board|
+      if board.finished?
+        evaluate(board)
+      else
+        board_children = []
+        board.each_next_board_and_move(symbol) { |board, move| board_children << [board, move] }
+        minimax_get_move(board_children, !maximize)
+      end
+    end
+
+    if maximize
+      boards.max # send lambda here
+    else
+      boards.min # send lambda here
+    end
+  end
 
   def evaluate(board)
     return 0 unless board.finished?
