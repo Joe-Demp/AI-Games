@@ -64,6 +64,12 @@ class BoardGameTest < Test::Unit::TestCase
     assert_equal(:o, @board_a.state[7])
   end
 
+  def test_opposing_symbol
+    assert_equal(:o, @board_a.opposing_symbol(:x))
+    assert_equal(:x, @board_a.opposing_symbol(:o))
+    assert_equal(:y, @board_f.opposing_symbol(:x))
+  end
+
   def test_finished?
     assert_false(@empty_board.finished?)
     assert_false(@board_a.finished?)

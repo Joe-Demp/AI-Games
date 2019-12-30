@@ -31,6 +31,11 @@ class BoardGame < Game
     @state[index] = symbol
   end
 
+  def opposing_symbol(symbol)
+    opponent = @state.find { |sym| sym != SPACE && sym != symbol }
+    opponent.nil? ? symbol.succ : opponent
+  end
+
   def finished?
     !@state.include?(' '.to_sym)
   end

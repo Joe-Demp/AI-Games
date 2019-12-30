@@ -20,13 +20,17 @@ class TTTMiniMaxPlayer < Player
     end
 
     # @todo tidy this up
+    # should always return a score of the board passed to it
+    #
     board_evaluate = lambda do |board|
       if board.finished?
         evaluate(board)
       else
+        symbol = board.opposing_symbol(@symbol)
         board_children = []
         board.each_next_board_and_move(symbol) { |board, move| board_children << [board, move] }
         minimax_get_move(board_children, !maximize)
+        # fix the return value of this method
       end
     end
 
