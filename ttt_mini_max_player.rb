@@ -6,38 +6,28 @@ require_relative 'player.rb'
 class TTTMiniMaxPlayer < Player
   # Calls a method that implements the MiniMax algorithm
   # takes in the second row of the MiniMax tree
-  def get_move(boards_and_moves); end
+  def get_move(boards_and_moves)
+    minimax_get_move(boards_and_moves)[1]
+  end
 
   def minimax_get_move(boards, maximize = true)
-    # if maximize, find the max and return it
-    #  the max being:
-    #   the evaluation of the board if board.finished?
-    #   or the minimax of the board's children
-    #
-    # else, find the min => could use a lambda
-    board_comparison = lambda do |board1, board2|
-
-    end
-
-    # @todo tidy this up
-    # should always return a score of the board passed to it
-    #
-    board_evaluate = lambda do |board|
-      if board.finished?
-        evaluate(board)
-      else
-        symbol = board.opposing_symbol(@symbol)
-        board_children = []
-        board.each_next_board_and_move(symbol) { |board, move| board_children << [board, move] }
-        minimax_get_move(board_children, !maximize)
-        # fix the return value of this method
-      end
-    end
-
+    # Takes arrays of [board, move] pairs
+    #   generates [score, move] pairs
+    #   and returns the pair with 'the best' score
+    scored_moves = boards.map { |board| score(board, maximize) }
     if maximize
-      boards.max # send lambda here
+      scored_moves.max_by { |pair| pair[0] }
     else
-      boards.min # send lambda here
+      scored_moves.min_by { |pair| pair[0] }
+    end
+  end
+
+  def score(pair, maximize)
+    if pair[0].finished?
+      pair[0] = evaluate(pair[0])
+      pair
+    else
+      minimax_get_move(pair, !maximize)
     end
   end
 
