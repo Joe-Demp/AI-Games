@@ -6,7 +6,7 @@ require_relative 'move.rb'
 # Some Documentation about TicTacToe
 class TicTacToe < BoardGame
   def initialize(player1, player2)
-    super(player1, player2,3)
+    super(player1, player2, 3)
   end
 
   def finished?
@@ -16,12 +16,6 @@ class TicTacToe < BoardGame
   def winning_symbol
     winning_row || winning_column || winning_diagonal
   end
-
-  # def to_s
-  #   "#{@state[0]}_|_#{@state[1]}_|_#{@state[2]}\n" \
-  #   "#{@state[3]}_|_#{@state[4]}_|_#{@state[5]}\n" \
-  #   "#{@state[6]} | #{@state[7]} | #{@state[8]}"
-  # end
 
   private
 

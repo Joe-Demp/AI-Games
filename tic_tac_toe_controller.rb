@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative 'tic_tac_toe.rb'
 require_relative 'ttt_random_player.rb'
 

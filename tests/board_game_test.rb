@@ -37,11 +37,13 @@ class BoardGameTest < Test::Unit::TestCase
 
   def test_each_next_move
     arrays = next_moves_empty_arrays
-    next_moves_empty, correct_moves0 = arrays[0], arrays[1]
+    next_moves_empty = arrays[0]
+    correct_moves0 = arrays[1]
     assert_equal(correct_moves0, next_moves_empty)
 
     arrays = next_moves_half_empty_arrays
-    next_moves_half_empty, correct_moves1 = arrays[0], arrays[1]
+    next_moves_half_empty = arrays[0]
+    correct_moves1 = arrays[1]
     assert_equal(correct_moves1, next_moves_half_empty)
 
     next_moves_full = []

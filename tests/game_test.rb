@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test/unit'
 require_relative '../game.rb'
 require_relative '../player.rb'
@@ -5,7 +7,7 @@ require_relative '../player.rb'
 # Class to test class Game
 class GameTest < Test::Unit::TestCase
   def setup
-    @game = Game.new(Player.new('Joseph',:x), Player.new('Ronald',:y))
+    @game = Game.new(Player.new('Joseph', :x), Player.new('Ronald', :y))
 
     Game.send(:attr_reader, :p1, :p2, :p1s_turn)
   end
