@@ -19,7 +19,7 @@ class TicTacToeTest < Test::Unit::TestCase
   end
 
   def teardown
-    TicTacToe.send(:undef_method, :state, :side)
+    TicTacToe.send(:undef_method, :state, :side, :state=, :side=)
   end
 
   def test_initialize
