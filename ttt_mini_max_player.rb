@@ -7,6 +7,7 @@ class TTTMiniMaxPlayer < Player
   # Calls a method that implements the MiniMax algorithm
   # takes in the second row of the MiniMax tree
   def get_move(boards_and_moves)
+    @opp_sym = boards_and_moves[0][0].opposing_symbol(@symbol)
     minimax_get_move(boards_and_moves)[1]
   end
 
@@ -24,10 +25,15 @@ class TTTMiniMaxPlayer < Player
 
   def score(pair, maximize)
     if pair[0].finished?
-      pair[0] = evaluate(pair[0])
-      pair
-    else
-      minimax_get_move(pair, !maximize)
+      [evaluate(pair[0]), pair[1]]
+    else # call minimax on the board's children
+      next_symbol = maximize ? @opp_sym : @symbol
+      children = []
+      pair[0].each_next_board_and_move(next_symbol) do |board, move|
+        children << [board, move]
+      end
+      # gets a [score, move] pair, keeps the score and returns the move
+      [minimax_get_move(children, !maximize)[0], pair[1]]
     end
   end
 

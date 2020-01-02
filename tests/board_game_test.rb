@@ -4,7 +4,7 @@ require 'test/unit'
 require_relative '../board_game.rb'
 require_relative '../move.rb'
 
-# Some Documentation about BoardTest
+# Some Documentation about BoardGameTest
 class BoardGameTest < Test::Unit::TestCase
   def setup
     @empty_board = BoardGame.new(nil, nil, 3)

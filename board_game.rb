@@ -19,6 +19,7 @@ class BoardGame < Game
     end
   end
 
+  # @todo change to return an array, not yield
   def each_next_board_and_move(symbol)
     each_next_move do |move|
       next_board = clone

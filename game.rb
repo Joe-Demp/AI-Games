@@ -28,7 +28,7 @@ class Game
   end
 
   def winners_message
-    sym = winning_symbol.nil? ? :nil : winning_symbol
+    sym = winning_symbol.nil? ? :nil : winning_symbol # because you can't call to_sym on nil
     winner = @p1.symbol == sym ? @p1 : @p2
 
     "(#{sym}) #{winner.name} has won!"
