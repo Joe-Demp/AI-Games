@@ -32,7 +32,7 @@ class BoardGameTest < Test::Unit::TestCase
   end
 
   def teardown
-    BoardGame.send(:undef_method, :state)
+    BoardGame.send(:undef_method, :state, :state=)
   end
 
   def test_each_next_move
