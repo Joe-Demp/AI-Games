@@ -2,6 +2,7 @@
 
 require 'test/unit'
 require_relative '../tic_tac_toe.rb'
+require_relative '../board_game.rb'
 
 # Documentation for TicTacToeTest
 class TicTacToeTest < Test::Unit::TestCase
@@ -67,8 +68,12 @@ class TicTacToeTest < Test::Unit::TestCase
     @board_v = TicTacToe.new(nil, nil)
     @board_w = TicTacToe.new(nil, nil)
 
-    @board_v.state = [nil, nil, :d, nil, :d, nil, :d, nil, nil]
-    @board_w.state = [:d, nil, nil, nil, :d, nil, nil, nil, :d]
+    @board_v.state = [BoardGame::SPACE, BoardGame::SPACE, :d,
+                      BoardGame::SPACE, :d, BoardGame::SPACE,
+                      :d, BoardGame::SPACE, BoardGame::SPACE]
+    @board_w.state = [:d, BoardGame::SPACE, BoardGame::SPACE,
+                      BoardGame::SPACE, :d, BoardGame::SPACE,
+                      BoardGame::SPACE, BoardGame::SPACE, :d]
   end
 
   def setup_vertical_wins
@@ -76,9 +81,15 @@ class TicTacToeTest < Test::Unit::TestCase
     @board_y = TicTacToe.new(nil, nil)
     @board_z = TicTacToe.new(nil, nil)
 
-    @board_x.state = [:v, nil, nil, :v, nil, nil, :v, nil, nil]
-    @board_y.state = [nil, :v, nil, nil, :v, nil, nil, :v, nil]
-    @board_z.state = [nil, nil, :v, nil, nil, :v, nil, nil, :v]
+    @board_x.state = [:v, BoardGame::SPACE, BoardGame::SPACE,
+                      :v, BoardGame::SPACE, BoardGame::SPACE,
+                      :v, BoardGame::SPACE, BoardGame::SPACE]
+    @board_y.state = [BoardGame::SPACE, :v, BoardGame::SPACE,
+                      BoardGame::SPACE, :v, BoardGame::SPACE,
+                      BoardGame::SPACE, :v, BoardGame::SPACE]
+    @board_z.state = [BoardGame::SPACE, BoardGame::SPACE, :v,
+                      BoardGame::SPACE, BoardGame::SPACE, :v,
+                      BoardGame::SPACE, BoardGame::SPACE, :v]
   end
 
   def setup_horizontal_wins
@@ -87,8 +98,14 @@ class TicTacToeTest < Test::Unit::TestCase
     @board_c = TicTacToe.new(nil, nil)
 
     # @todo fix this, States should be filled with SPACEs
-    @board_a.state = [:h, :h, :h, nil, nil, nil, nil, nil, nil]
-    @board_b.state = [nil, nil, nil, :h, :h, :h, nil, nil, nil]
-    @board_c.state = [nil, nil, nil, nil, nil, nil, :h, :h, :h]
+    @board_a.state = [:h, :h, :h,
+                      BoardGame::SPACE, BoardGame::SPACE, BoardGame::SPACE,
+                      BoardGame::SPACE, BoardGame::SPACE, BoardGame::SPACE]
+    @board_b.state = [BoardGame::SPACE, BoardGame::SPACE, BoardGame::SPACE,
+                      :h, :h, :h,
+                      BoardGame::SPACE, BoardGame::SPACE, BoardGame::SPACE]
+    @board_c.state = [BoardGame::SPACE, BoardGame::SPACE, BoardGame::SPACE,
+                      BoardGame::SPACE, BoardGame::SPACE, BoardGame::SPACE,
+                      :h, :h, :h]
   end
 end

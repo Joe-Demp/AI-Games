@@ -51,6 +51,6 @@ class TicTacToe < BoardGame
     won = true
     sym = @state[positions[0]]
     positions.each { |pos| won &&= sym == @state[pos] }
-    sym if won
+    sym if won unless sym == BoardGame::SPACE
   end
 end
