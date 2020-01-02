@@ -29,6 +29,11 @@ class BoardGame < Game
     children
   end
 
+  def symbol_at(move)
+    index = (move.row * @side) + (move.col % @side)
+    @state[index]
+  end
+
   def place(symbol, move)
     index = (move.row * @side) + move.col
     @state[index] = symbol
@@ -74,11 +79,6 @@ class BoardGame < Game
   def move_in_bounds?(move)
     space_unoccupied = symbol_at(move) == SPACE
     space_unoccupied && move.valid? && move.row < @side && move.col < @side
-  end
-
-  def symbol_at(move)
-    index = (move.row * @side) + (move.col % @side)
-    @state[index]
   end
 
   def row_to_s(first_number, last_row = false)

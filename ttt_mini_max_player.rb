@@ -16,6 +16,8 @@ class TTTMiniMaxPlayer < Player
     #   generates [score, move] pairs
     #   and returns the pair with 'the best' score
     scored_moves = boards.map { |board| score(board, maximize) }
+    # @todo consider a max_by method that stops when it's found an optimal move
+    # @todo do the same for min_by
     if maximize
       scored_moves.max_by { |pair| pair[0] }
     else
