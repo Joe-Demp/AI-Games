@@ -8,7 +8,7 @@ class TicTacToeTest < Test::Unit::TestCase
   def setup
     @empty_board = TicTacToe.new(nil, nil)
     @board_f = TicTacToe.new(nil, nil)
-    BoardGame.send(:attr_accessor, :state, :side)
+    TicTacToe.send(:attr_accessor, :state, :side)
 
     @board_f.state.fill(:x, 0..8)
 
@@ -19,7 +19,7 @@ class TicTacToeTest < Test::Unit::TestCase
   end
 
   def teardown
-    BoardGame.send(:undef_method, :state, :side)
+    TicTacToe.send(:undef_method, :state, :side)
   end
 
   def test_initialize
@@ -27,10 +27,10 @@ class TicTacToeTest < Test::Unit::TestCase
   end
 
   def test_finished?
-    assert(@board_f.finished?)
-    assert(@board_w.finished?)
-    assert(@board_z.finished?)
-    assert(@board_b.finished?)
+    assert_true(@board_f.finished?)
+    assert_true(@board_w.finished?)
+    assert_true(@board_z.finished?)
+    assert_true(@board_b.finished?)
 
     assert_false(@empty_board.finished?)
   end
