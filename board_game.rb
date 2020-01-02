@@ -9,7 +9,7 @@ class BoardGame < Game
     super(player1, player2)
     @side = side_len
     @state = []
-    @state.fill(' '.to_sym, 0...(@side**2))
+    @state.fill(SPACE, 0...(@side**2))
   end
 
   def each_next_move

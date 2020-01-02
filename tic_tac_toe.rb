@@ -17,6 +17,12 @@ class TicTacToe < BoardGame
     winning_row || winning_column || winning_diagonal
   end
 
+  def clone
+    other = TicTacToe.new(@p1, @p2)
+    other.state = @state.clone
+    other
+  end
+
   private
 
   def winning_row

@@ -40,6 +40,6 @@ class TTTMiniMaxPlayer < Player
   def evaluate(board)
     return 0 unless board.finished?
 
-    winning_symbol == @symbol ? 1 : -1
+    board.winning_symbol == @symbol ? 1 : -1
   end
 end
