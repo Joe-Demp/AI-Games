@@ -17,10 +17,10 @@ class Game
 
   def play_next_move
     current_player = @p1s_turn ? @p1 : @p2
-    boards_and_moves = []
-    each_next_board_and_move(current_player.symbol) do |board, move|
-      boards_and_moves << [board, move]
-    end
+    boards_and_moves = each_next_board_and_move(current_player.symbol)
+    # each_next_board_and_move(current_player.symbol) do |board, move|
+    #   boards_and_moves << [board, move]
+    # end
 
     move = current_player.get_move(boards_and_moves)
     place(current_player.symbol, move) unless move.nil?

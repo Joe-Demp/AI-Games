@@ -52,10 +52,7 @@ class BoardGameTest < Test::Unit::TestCase
   end
 
   def test_each_next_board_and_move
-    next_boards_and_moves = []
-    @board_b.each_next_board_and_move(:o) do |board, move|
-      next_boards_and_moves << [board, move]
-    end
+    next_boards_and_moves = @board_b.each_next_board_and_move(:o)
 
     assert_equal(actual_next_boards_and_moves, next_boards_and_moves)
   end

@@ -21,11 +21,13 @@ class BoardGame < Game
 
   # @todo change to return an array, not yield
   def each_next_board_and_move(symbol)
+    children = []
     each_next_move do |move|
       next_board = clone
       next_board.place(symbol, move)
-      yield next_board, move
+      children << [next_board, move]
     end
+    children
   end
 
   def place(symbol, move)

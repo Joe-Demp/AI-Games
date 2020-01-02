@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test/unit'
 require_relative '../tic_tac_toe.rb'
 require_relative '../ttt_mini_max_player.rb'
@@ -23,10 +25,10 @@ class TTTMiniMaxPlayerTest < Test::Unit::TestCase
        :x, :o, :x,
        :x, :x, :o]
 
-    children = []
-    @game_a.each_next_board_and_move(@player_x.symbol) do |board, move|
-      children << [board, move]
-    end
+    children = @game_a.each_next_board_and_move(@player_x.symbol)
+    # @game_a.each_next_board_and_move(@player_x.symbol) do |board, move|
+    #   children << [board, move]
+    # end
 
     assert_equal(Move.new(0, 0), @player_x.get_move(children))
   end
@@ -37,16 +39,16 @@ class TTTMiniMaxPlayerTest < Test::Unit::TestCase
        BoardGame::SPACE, :o, :o,
        :x, BoardGame::SPACE, BoardGame::SPACE]
 
-    children = []
-    @game_a.each_next_board_and_move(@player_x.symbol) do |board, move|
-      children << [board, move]
-    end
+    children = @game_a.each_next_board_and_move(@player_x.symbol)
+    # @game_a.each_next_board_and_move(@player_x.symbol) do |board, move|
+    #   children << [board, move]
+    # end
     assert_equal(Move.new(0, 1), @player_x.get_move(children))
 
-    children = []
-    @game_a.each_next_board_and_move(@player_o.symbol) do |board, move|
-      children << [board, move]
-    end
+    children = @game_a.each_next_board_and_move(@player_o.symbol)
+    # @game_a.each_next_board_and_move(@player_o.symbol) do |board, move|
+    #   children << [board, move]
+    # end
     assert_equal(Move.new(1, 0), @player_o.get_move(children))
   end
 
@@ -56,16 +58,16 @@ class TTTMiniMaxPlayerTest < Test::Unit::TestCase
        :x, :o, :x,
        BoardGame::SPACE, BoardGame::SPACE, BoardGame::SPACE]
 
-    children = []
-    @game_a.each_next_board_and_move(@player_x.symbol) do |board, move|
-      children << [board, move]
-    end
+    children = @game_a.each_next_board_and_move(@player_x.symbol)
+    # @game_a.each_next_board_and_move(@player_x.symbol) do |board, move|
+    #   children << [board, move]
+    # end
     assert_equal(Move.new(2, 0), @player_x.get_move(children))
 
-    children = []
-    @game_a.each_next_board_and_move(@player_o.symbol) do |board, move|
-      children << [board, move]
-    end
+    children = @game_a.each_next_board_and_move(@player_o.symbol)
+    # @game_a.each_next_board_and_move(@player_o.symbol) do |board, move|
+    #   children << [board, move]
+    # end
     assert_equal(Move.new(2, 0), @player_o.get_move(children))
   end
 end

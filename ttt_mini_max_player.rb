@@ -28,10 +28,10 @@ class TTTMiniMaxPlayer < Player
       [evaluate(pair[0]), pair[1]]
     else # call minimax on the board's children
       next_symbol = maximize ? @opp_sym : @symbol
-      children = []
-      pair[0].each_next_board_and_move(next_symbol) do |board, move|
-        children << [board, move]
-      end
+      children = pair[0].each_next_board_and_move(next_symbol)
+      # pair[0].each_next_board_and_move(next_symbol) do |board, move|
+      #   children << [board, move]
+      # end
       # gets a [score, move] pair, keeps the score and returns the move
       [minimax_get_move(children, !maximize)[0], pair[1]]
     end
