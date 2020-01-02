@@ -86,6 +86,7 @@ class TicTacToeTest < Test::Unit::TestCase
     @board_b = TicTacToe.new(nil, nil)
     @board_c = TicTacToe.new(nil, nil)
 
+    # @todo fix this, States should be filled with SPACEs
     @board_a.state = [:h, :h, :h, nil, nil, nil, nil, nil, nil]
     @board_b.state = [nil, nil, nil, :h, :h, :h, nil, nil, nil]
     @board_c.state = [nil, nil, nil, nil, nil, nil, :h, :h, :h]

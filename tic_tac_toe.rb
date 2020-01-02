@@ -26,6 +26,7 @@ class TicTacToe < BoardGame
     sym unless sym == SPACE
   end
 
+  # @todo fix issue here where || ignores other characters if SPACE is stored in sym
   def winning_column
     sym = winning_positions([0, 3, 6])
     sym ||= winning_positions([1, 4, 7])
@@ -39,6 +40,7 @@ class TicTacToe < BoardGame
     sym unless sym == SPACE
   end
 
+  # @todo consider using reduce here
   def winning_positions(positions)
     won = true
     sym = @state[positions[0]]
