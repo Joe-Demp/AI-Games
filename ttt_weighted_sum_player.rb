@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'player.rb'
+
 # A Player that decides on it's next move by evaluating boards with a weighted sum
 class TTTWeightedSumPlayer < Player
   def get_move(boards_and_moves)
@@ -8,45 +10,34 @@ class TTTWeightedSumPlayer < Player
   end
 
   def score(board)
+    return Float::INFINITY if board.finished?
+
     score = 0
     score += 3 if middle_taken?(board)
     score += rows_and_columns_with_two(board)
 
-    score = Float::INFINITY if board.finished?
     score
   end
 
   def middle_taken?(board)
-    board.symbol_at(Move.new(1, 1)) == @symbol
+    @symbol == board.symbol_at(Move.new(1, 1))
   end
 
   def rows_and_columns_with_two(board)
     count = 0
-    (0...3).each do |num|
-      count +=1 if number_in_column(board, num) == 2
-      count +=1 if number_in_row(board, num) == 2
-    end
-    count
+    count += (0...3).count { |num| number_in_column(board, num) == 2 }
+    count + (0...3).count { |num| number_in_row(board, num) == 2 }
   end
 
-  # @todo reconsider this. Could a Proc help reduce code duplication?
   def number_in_column(board, column)
     return if column > 2
 
-    count = 0
-    (0...3).each do |row|
-      count += 1 if @symbol == board.symbol_at(Move.new(row, column))
-    end
-    count
+    (0...3).count { |row| @symbol == board.symbol_at(Move.new(row, column)) }
   end
 
   def number_in_row(board, row)
     return if row > 2
 
-    count = 0
-    (0...3).each do |column|
-      count += 1 if @symbol == board.symbol_at(Move.new(row, column))
-    end
-    count
+    (0...3).count { |column| @symbol == board.symbol_at(Move.new(row, column)) }
   end
 end
