@@ -10,6 +10,7 @@ class TTTWeightedSumPlayer < Player
   def score(board)
     score = 0
     score += 3 if middle_taken?(board)
+    score += rows_and_columns_with_two(board)
 
     score = Float::INFINITY if board.finished?
     score
@@ -20,7 +21,12 @@ class TTTWeightedSumPlayer < Player
   end
 
   def rows_and_columns_with_two(board)
-    # @todo implement this
+    count = 0
+    (0...3).each do |num|
+      count +=1 if number_in_column(board, num) == 2
+      count +=1 if number_in_row(board, num) == 2
+    end
+    count
   end
 
   # @todo reconsider this. Could a Proc help reduce code duplication?
@@ -29,6 +35,16 @@ class TTTWeightedSumPlayer < Player
 
     count = 0
     (0...3).each do |row|
+      count += 1 if @symbol == board.symbol_at(Move.new(row, column))
+    end
+    count
+  end
+
+  def number_in_row(board, row)
+    return if row > 2
+
+    count = 0
+    (0...3).each do |column|
       count += 1 if @symbol == board.symbol_at(Move.new(row, column))
     end
     count
