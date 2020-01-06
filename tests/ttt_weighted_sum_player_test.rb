@@ -20,6 +20,12 @@ class TTTWeightedSumPlayerTest < Test::Unit::TestCase
     @finished_board = TicTacToe.new(nil, nil)
     @finished_board.state =
       [:p, SPACE, SPACE, :p, SPACE, SPACE, :p, SPACE, SPACE]
+
+    @board_l = TicTacToe.new(nil, nil)
+    @board_l.state = [:p, SPACE, SPACE, :p, SPACE, SPACE, :p, :p, :p]
+
+    @board_k = TicTacToe.new(nil, nil)
+    @board_k.state = [:p, SPACE, :p, SPACE, :p, :p, :p, SPACE, :p]
   end
 
   def teardown
