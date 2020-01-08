@@ -5,8 +5,9 @@ require_relative 'player.rb'
 # A Player deciding on it's next move by evaluating boards with a weighted sum
 class TTTWeightedSumPlayer < Player
   def get_move(boards_and_moves)
+    boards_and_moves.shuffle!
     scores_and_moves = boards_and_moves.map { |pair| [score(pair[0]), pair[1]] }
-    scores_and_moves.max_by { |pair| pair[0] }
+    scores_and_moves.max_by { |pair| pair[0] }[1]
   end
 
   def score(board)

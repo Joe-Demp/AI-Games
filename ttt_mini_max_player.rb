@@ -8,7 +8,7 @@ class TTTMiniMaxPlayer < Player
   # takes in the second row of the MiniMax tree
   def get_move(boards_and_moves)
     @opp_sym = boards_and_moves[0][0].opposing_symbol(@symbol)
-    minimax_get_move(boards_and_moves)[1]
+    minimax_get_move(boards_and_moves.shuffle)[1]
   end
 
   def minimax_get_move(boards, maximize = true)
