@@ -2,7 +2,7 @@
 
 require_relative 'player.rb'
 
-# A Player that decides on it's next move by evaluating boards with a weighted sum
+# A Player deciding on it's next move by evaluating boards with a weighted sum
 class TTTWeightedSumPlayer < Player
   def get_move(boards_and_moves)
     scores_and_moves = boards_and_moves.map { |pair| [score(pair[0]), pair[1]] }
@@ -14,7 +14,8 @@ class TTTWeightedSumPlayer < Player
 
     score = 0
     score += 3 if middle_taken?(board)
-    score + rows_and_columns_with_two(board)
+    score += rows_and_columns_with_two(board)
+    score + diagonals_with_two(board)
   end
 
   def middle_taken?(board)
@@ -42,13 +43,13 @@ class TTTWeightedSumPlayer < Player
   def diagonals_with_two(board)
     diagonals = 0
 
-    count = [Move.new(0, 0), Move.new(1, 1), Move.new(2, 2)].count do
-      |move| @symbol == board.symbol_at(move)
+    count = [Move.new(0, 0), Move.new(1, 1), Move.new(2, 2)].count do |move|
+      @symbol == board.symbol_at(move)
     end
     diagonals += 1 if count == 2
 
-    count = [Move.new(0, 2), Move.new(1, 1), Move.new(2, 0)].count do
-      |move| @symbol == board.symbol_at(move)
+    count = [Move.new(0, 2), Move.new(1, 1), Move.new(2, 0)].count do |move|
+      @symbol == board.symbol_at(move)
     end
     count == 2 ? diagonals + 1 : diagonals
   end
